@@ -1,0 +1,71 @@
+# ===========================
+# Line Endings (normalização)
+# ===========================
+
+# Detecta e normaliza automaticamente finais de linha
+* text=auto
+
+# ===========================
+# Arquivos de texto específicos
+# ===========================
+
+# Código-fonte Java
+*.java          text diff=java
+
+# Gradle
+*.gradle        text diff
+*.properties    text diff
+*.toml          text diff
+
+# Markdown / Docs
+*.md            text diff=markdown
+*.txt           text diff
+
+# YAML / JSON
+*.yml           text diff
+*.yaml          text diff
+*.json          text diff
+
+# XML
+*.xml           text diff
+
+# ===========================
+# Scripts
+# ===========================
+
+# Linux start script deve usar LF
+gradlew         text eol=lf
+
+# Windows script deve usar CRLF
+*.bat           text eol=crlf
+*.cmd           text eol=crlf
+
+# Shell scripts
+*.sh            text eol=lf
+
+# PowerShell
+*.ps1           text eol=crlf
+
+# ===========================
+# Binários (sem diff, sem merge)
+# ===========================
+*.jar           binary
+*.class         binary
+*.png           binary
+*.jpg           binary
+*.jpeg          binary
+*.gif           binary
+*.ico           binary
+*.pdf           binary
+*.zip           binary
+*.gz            binary
+*.tar           binary
+
+# ===========================
+# Linguística (GitHub)
+# ===========================
+
+# Marcar arquivos gerados para não poluir o diff no GitHub
+gradlew         linguist-generated
+gradlew.bat     linguist-generated
+gradle/wrapper/ linguist-generated
