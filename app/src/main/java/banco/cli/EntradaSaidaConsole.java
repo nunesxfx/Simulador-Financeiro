@@ -18,6 +18,20 @@ public class EntradaSaidaConsole {
         return scanner.nextLine();
     }
 
+    public int lerInteiro(String prompt){
+        while(true) {
+            try {
+                System.out.print(prompt);
+                int valor = scanner.nextInt();
+                scanner.nextLine(); // Limpar o buffer do scanner
+                return valor;
+            } catch (InputMismatchException e) {
+                System.out.println("Erro: Por favor, digite um valor inteiro valido.");
+                scanner.nextLine(); // Limpar o buffer do scanner
+            }
+        }
+    }
+
     public double lerValorFinanceiro(String prompt){
         while(true) {
             try {
