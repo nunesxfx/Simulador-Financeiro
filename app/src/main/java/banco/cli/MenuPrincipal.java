@@ -2,8 +2,7 @@ package banco.cli;
 
 import banco.service.ContaService;
 import java.math.BigDecimal;
-import banco.cli.ValidarCPF;
-import banco.model.Conta;
+import banco.model.*;
 
 public class MenuPrincipal
 {
@@ -59,7 +58,6 @@ public class MenuPrincipal
         {
             io.exibirMensagem("Erro ao criar a conta no sistema: " + e.getMessage());
         }
-        boolean contaCriada = titular != null && cpf != null && limiteChequeEspecial != null;
     }
 
     private void exibirMenu() {
@@ -83,26 +81,25 @@ public class MenuPrincipal
                     io.exibirMensagem("--------------------------------");
                     switch(operacaoConta){
                         case 1:
-                            BigDecimal valorDeDeposito = BigDecimal.valueOf(io.lerValorFinanceiro("Quanto deseja depositar: R$"));
-                            BigDecimal novoSaldoDeposito = conta.getSaldo().add(valorDeDeposito);
-                            conta.depositar(valorDeDeposito);
-                            io.exibirMensagem("Deposito realizado com sucesso! Novo saldo: R$" + novoSaldoDeposito);
-                            io.exibirMensagem("--------------------------------");
+
+                            double depositoDigitado = io.lerValorFinanceiro("Digite o valor do deposito: R$");
+                            BigDecimal valorConvertido = BigDecimal.valueOf(depositoDigitado);
+                        
+                            Transacao novoDeposito = new Transacao(Transacao.TipoTransacao.DEPOSITO, valorConvertido, conta); //serve para gerar um extrato de transferencia
+                            novoDeposito.processar();
+
                             break;
                             
                         case 2:
-                            BigDecimal valorDeSaque = BigDecimal.valueOf(io.lerValorFinanceiro("Quanto deseja sacar: R$"));
-                            Conta contaAtualizadaSaque = conta.getSaldo().compareTo(valorDeSaque) >= 0 ? conta : null;
-                            if (contaAtualizadaSaque != null) {
-                                conta.sacar(valorDeSaque);
-                                BigDecimal novoSaldoSaque = conta.getSaldo();
-                                io.exibirMensagem("Saque realizado com sucesso! Novo saldo: R$" + novoSaldoSaque);
-                                io.exibirMensagem("--------------------------------");
-                            } else {
-                                io.exibirMensagem("Saldo insuficiente para realizar o saque.");
-                                io.exibirMensagem("--------------------------------");
-                            }
+
+                            double saqueDigitado = io.lerValorFinanceiro("Digite o valor do saque: R$");
+                            BigDecimal valorConvertidoo = BigDecimal.valueOf(saqueDigitado);
+
+                            Transacao novoSaque = new Transacao(Transacao.TipoTransacao.SAQUE, valorConvertidoo, conta);
+                            novoSaque.processar();
+
                             break;
+                             
                         default:
                             io.exibirMensagem("Opcao invalida! Tente novamente.");
                     }
