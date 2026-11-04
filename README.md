@@ -142,18 +142,24 @@ Simulador_Financeiro/
 - [x] **Formatação de CPF** — método `mostrarCPF()` para exibição formatada (XXX.XXX.XXX-XX)
 - [x] **Entrada/Saída do console (`EntradaSaidaConsole`)** — leitura de texto e valores financeiros com tratamento de `InputMismatchException`
 - [x] **Menu principal (`MenuPrincipal`)** — fluxo de criação de conta com validação de CPF integrada
+- [x] **Transações de depósito e saque (`Transacao`)** — registro de valor, data/hora, tipo e processamento na conta
+- [x] **Menu de mercado financeiro** — opção para adquirir CDB e escolher a modalidade de rentabilidade
+- [x] **Modelo inicial de CDB (`AtivoFinanceiro`)** — emissor sorteado, tipo de rentabilidade e taxa prefixada
+- [x] **Tipos de rentabilidade** — `PREFIXADO`, `POS_FIXADO` e `HIBRIDO`
+- [x] **Construtor de ativo financeiro** — valida a rentabilidade e a taxa quando o CDB é prefixado
+- [x] **Encerramento da aplicação** — opção `Sair` encerra o loop principal
 - [x] **Gradle Wrapper** — projeto executável sem instalação prévia do Gradle
 
 ### 🟡 Estrutura Criada (Pendente de Implementação)
 
-- [ ] **Modelo `Cliente`** — classe vazia, falta atributos (nome, CPF, lista de contas)
-- [ ] **Modelo `ContaInvestimento`** — classe vazia, falta herdar de `Conta` e adicionar lógica de investimentos
-- [ ] **Modelo `Transacao`** — classe vazia, falta atributos (tipo, valor, data, contas envolvidas)
-- [ ] **Modelo `AtivoFinanceiro`** — classe vazia, falta definir base para ativos (nome, valor, rentabilidade)
-- [ ] **Modelo `CertificadoRendaFIxa`** — classe vazia, falta implementar CDB/LCI/LCA com taxa e vencimento
-- [ ] **Modelo `FundoImobiliario`** — classe vazia, falta implementar FIIs com cotas e dividendos
+- [ ] **Modelo `Cliente`** — arquivo criado, mas ainda sem atributos e regras de cliente
+- [ ] **Modelo `ContaInvestimento`** — arquivo criado, mas ainda sem herdar de `Conta` e sem lógica de investimentos
+- [x] **Modelo `Transacao`** — registra tipo, valor, data/hora e conta-alvo; atualmente suporta depósito e saque
+- [ ] **Modelo `AtivoFinanceiro`** — possui cadastro inicial de CDB, mas ainda falta generalizar ativos e adicionar valor, prazo, vencimento e demais propriedades
+- [ ] **Modelo `CertificadoRendaFIxa`** — arquivo criado, mas ainda sem implementação de CDB/LCI/LCA
+- [ ] **Modelo `FundoImobiliario`** — arquivo criado, mas ainda sem implementação de cotas e dividendos
 - [ ] **Exceção `SaldoInsuficienteException`** — classe não estende `Exception` / `RuntimeException`
-- [ ] **Exceção `AtivovNaoEncontradoException`** — classe não estende `Exception` / `RuntimeException` *(obs: possível typo no nome — "Ativov" → "Ativo")*
+- [ ] **Exceção `AtivoNaoEncontradoException`** — classe não estende `Exception` / `RuntimeException`
 - [ ] **`TransferenciaService`** — classe vazia, falta lógica de transferência entre contas
 - [ ] **`MercadoFinanceiroService`** — classe vazia, falta simulação de mercado e rendimentos
 - [ ] **`ArquivoExtratoRepository`** — classe vazia, falta persistência de extratos em arquivo
@@ -162,12 +168,17 @@ Simulador_Financeiro/
 
 ### 🔴 Melhorias e Correções Necessárias
 
-- [ ] **Menu incompleto** — opções "Realizar Transferência" e "Sair" não estão implementadas no `switch`
-- [ ] **Loop infinito no menu** — a variável `rodando` nunca é setada como `false`, impossibilitando a saída
-- [ ] **`mainClass` incorreta no `build.gradle`** — está `simulador_financeiro.App`, deveria ser `banco.Main`
+- [ ] **Integração do CDB com a conta** — adquirir o ativo ainda não debita o saldo nem registra a posição de investimento
+- [ ] **Taxas pré-definidas dos CDBs** — o menu ainda solicita a taxa prefixada ao usuário; cadastrar produtos com taxas próprias
+- [ ] **Cálculo de rentabilidade** — implementar cálculo para CDB prefixado, pós-fixado e híbrido
+- [ ] **Dados do CDB** — adicionar prazo, vencimento, liquidez, FGC e valor investido
+- [ ] **Transferências** — adicionar a operação ao menu e implementar validação de origem, destino e saldo
+- [ ] **Extrato** — registrar transações e disponibilizar consulta ao usuário
+- [ ] **Persistência** — substituir ou complementar o armazenamento em memória com persistência de contas e extratos
 - [ ] **Reflection desnecessária no `ContaRepository`** — método `obterNumero()` usa `Field.setAccessible()` quando poderia usar o getter `getNumero()` já existente
-- [ ] **Testes unitários** — nenhum teste foi implementado ainda (JUnit 5 já está configurado como dependência)
+- [ ] **Testes unitários** — criar testes para contas, transações, CDB e validações (JUnit 5 já está configurado como dependência)
 - [ ] **Getters faltando em `Conta`** — não há getters para `titular` e `cpf`
+- [ ] **Formatação da saída** — usar `FormatadorMoeda` no menu para exibir valores em reais
 
 ---
 
@@ -195,4 +206,3 @@ Este projeto é de uso acadêmico e livre para fins de estudo e portfólio.
 <p align="center">
   Desenvolvido com ☕ Java para fins acadêmicos
 </p>
-
