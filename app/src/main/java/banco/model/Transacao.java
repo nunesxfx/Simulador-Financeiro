@@ -3,7 +3,7 @@ package banco.model;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-// Dica de POO: Usar um Enum para definir os tipos de transação 
+// Enum para definir os tipos de transação 
 
 
 public class Transacao {
@@ -58,18 +58,12 @@ public class Transacao {
     // Inserir os Getters e Setters conforme necessário para acessar os atributos privados da classe Transacao 
 
     //get para mostrar o valor da transação
-    public BigDecimal getValor(){
-        return valor;
-    }
+    public BigDecimal getValor() {return valor;}
 
     //get para mostrar a data da transação
-    public LocalDateTime getDataEHora(){
-        return dataHora;
-    }
+    public LocalDateTime getDataEHora() {return dataHora;}
 
-    //get para mostrar qual conta sera enviada o dinhei
-    public Conta getContaAlvo(){
-        return contaAlvo;
-    }
+    //get para mostrar qual conta sera enviada o dinheiro
+    public Conta getContaAlvo() {return contaAlvo;}
 
 }

@@ -3,6 +3,7 @@ package banco.cli;
 import banco.service.ContaService;
 import java.math.BigDecimal;
 import banco.model.*;
+import banco.model.ativos.AtivoFinanceiro;
 
 public class MenuPrincipal
 {
@@ -106,7 +107,54 @@ public class MenuPrincipal
                     break;
                 case 2:
                     io.exibirMensagem("Operacoes no Mercado Financeiro:");
+                    io.exibirMensagem("1. Adquirir CDB");
+                    int operacaoMf = io.lerInteiro("Escolha uma operacao: ");
                     io.exibirMensagem("--------------------------------");
+                    switch (operacaoMf) {
+                        case 1:
+                            
+                            io.exibirMensagem("Escolha a rentabilidade do CDB:");
+                            io.exibirMensagem("1. PREFIXADO");
+                            io.exibirMensagem("2. POS_FIXADO");
+                            io.exibirMensagem("3. HIBRIDO");
+                            int opcaoRentabilidade = io.lerInteiro("Opcao: ");
+
+                            AtivoFinanceiro.TipoRentabilidade rentabilidade = null;
+                            BigDecimal taxa = BigDecimal.ZERO;
+                            
+                            switch (opcaoRentabilidade) {
+                                case 1:
+                                    rentabilidade = AtivoFinanceiro.TipoRentabilidade.PREFIXADO;
+                                    double taxaDigitada = io.lerValorFinanceiro("Informe a taxa anual prefixada (%): ");
+                                    taxa = BigDecimal.valueOf(taxaDigitada);
+                                    break;
+                                case 2:
+                                    rentabilidade = AtivoFinanceiro.TipoRentabilidade.POS_FIXADO;
+                                    break;
+                                case 3:
+                                    rentabilidade = AtivoFinanceiro.TipoRentabilidade.HIBRIDO;
+                                    break;
+                                default:
+                                    io.exibirMensagem("Opcao invalida! Operacao cancelada.");
+                                    break;
+                            }
+
+                            
+                            if (rentabilidade != null) {
+                                // Cria o CDB (o emissor sera sorteado automaticamente)
+                                AtivoFinanceiro cdb = new AtivoFinanceiro(rentabilidade, taxa);
+                                
+                                io.exibirMensagem("--------------------------------");
+                                io.exibirMensagem("CDB adquirido com sucesso!");
+                                io.exibirMensagem(cdb.toString());
+                                io.exibirMensagem("--------------------------------");
+                            }
+                            break;
+                    
+                        default:
+                            break;
+                    }
+                    
                     break;
                 case 3:
                     io.exibirMensagem("Saindo do sistema...");

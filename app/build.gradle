@@ -34,7 +34,7 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass = 'simulador_financeiro.App'
+    mainClass = 'banco.Main'
 }
 
 tasks.named('test') {
