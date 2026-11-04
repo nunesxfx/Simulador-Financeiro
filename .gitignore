@@ -42,7 +42,7 @@ nbdist/
 
 # VS Code
 .vscode/
-
+.checklist.md
 # ===========================
 # Sistema Operacional
 # ===========================
