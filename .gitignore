@@ -42,7 +42,7 @@ nbdist/
 
 # VS Code
 .vscode/
-checklist.md
+
 # ===========================
 # Sistema Operacional
 # ===========================
@@ -70,3 +70,9 @@ replay_pid*
 # ===========================
 .env
 .env.*
+
+# ===========================
+# Lembretes e Organização
+# ===========================
+*.md
+!README.md
